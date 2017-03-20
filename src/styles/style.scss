@@ -1,0 +1,31 @@
+$nineties-yellow: #FEFF00; 
+$nineties-purple: #AC69D3;
+$nineties-blue: #7BB4C5;
+$almost-black: #222;
+
+* {
+	font-family: Helvetica, Arial, sans-serif;
+	box-sizing: border-box;
+}
+
+.container {
+	text-align: center;
+	background: $nineties-blue;
+	height: 100vh;
+
+	&:hover {
+		background: lighten($nineties-blue,5)
+	}
+
+	h1 {
+		font-size: 72px;
+		text-align: center;
+		color: $nineties-yellow;
+		background: $almost-black;
+		display: inline-block;
+		padding: 10px 20px;
+		box-shadow: 5px 5px 0 $nineties-purple;
+		transform: skew(-1deg,-2deg);
+	}
+}
+
