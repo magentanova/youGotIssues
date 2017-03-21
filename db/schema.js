@@ -12,7 +12,13 @@ const usersSchema = new mongoose.Schema({
    // example of optional fields
   name:      { type: String },
   createdAt: { type: Date, default: Date.now }
+})
 
+const issueSchema = new mongoose.Schema({
+	userName: { type: String, required: true },
+	relationshipStatus: {type: String, required: true},
+	relationshipIssue: {type: String, required: true},
+	createdAt: { type: Date, default: Date.now }
 })
 
 module.exports = {

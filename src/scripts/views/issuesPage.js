@@ -3,8 +3,8 @@ import React from 'react'
 import IssueForm from './issueForm.js'
 import STORE from '../store.js'
 // es5 way of creating react components
-const IssuesPage = React.createClass({
 
+const IssuesPage = React.createClass({
 	componentWillMount: function() {
 		STORE.on('dataUpdated', () => {
 			this.setState(STORE.data)
@@ -16,19 +16,61 @@ const IssuesPage = React.createClass({
 	},
 
 	 render: function() {
+	 	console.log('state on issuesPage', this.state)
 	 	return (
 	 		<div className='issues-page' >
 	 			<h1>You Got Issues!</h1>
 	 			<IssueForm />
+	 			<IssuesList issueCollection={this.state.issueCollection} />
 	 		</div>
 	 	)
  	}
 })
 
+const IssuesList = React.createClass({
+	_makeIssue: function(model) {
+		return <Issue issueModel={model} key={model.cid} />
+	},
+
+	render: function() {
+		return (
+			<div className="issues-list">
+				{this.props.issueCollection.map(this._makeIssue)}
+			</div>
+			)
+	}
+})
+
+const Issue = React.createClass({
+	render: function() {
+		return (
+			<div className="issue-container">
+				<h3 className="issue-text">
+					{this.props.issueModel.get('relationshipIssue')}
+				</h3>
+				<p className="poster-name">
+					posted by {this.props.issueModel.get('userName')} 
+					<span>
+						&nbsp;who is {this.props.issueModel.get('relationshipStatus')}
+					</span>
+				</p>
+			</div>
+			)
+	}
+})
+
+// can also do this...
+// function Issue(props) {
+// 	return (
+// 		<div>
+// 		</div>
+// 		)
+// }
 
 
 
 
+// for IssuesPage, React.createClass is the 
 // same as ... 
 
 // es6 way of creating them...

@@ -1,5 +1,7 @@
 import React from 'react'
 
+import ACTIONS from '../actions.js'
+
 const IssueForm = React.createClass({
 	_handleSubmit: function(eventObj) {
 		// a form will fire a submit event if either
@@ -9,15 +11,17 @@ const IssueForm = React.createClass({
 		eventObj.preventDefault()
 		// prevent the submit event from making its own request
 		var formEl = eventObj.target
-		var enteredData = {
+		var issueData = {
 			userName: formEl.theirName.value,
 			relationshipStatus: formEl.status.value,
 			relationshipIssue: formEl.issue.value
 		}
-		if (this._validate(enteredData)) {
+		if (this._validate(issueData)) {
 			// do something
 		}
-		console.log(enteredData)
+
+		ACTIONS.addIssue(issueData)
+		
 		formEl.reset()
 	},
 
@@ -35,6 +39,7 @@ const IssueForm = React.createClass({
 	 				<option disabled>what's your status?</option>
 	 				<option value="single">single</option>
 	 				<option value="in a relationship">in a relationship</option>
+	 				<option value="...it's complicated">it's complicated</option>
 	 			</select>
 	 			<input name="issue" type="text" placeholder="what issue you got?" />
 	 			<button type="submit">post my issue!</button>
