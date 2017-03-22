@@ -19,10 +19,10 @@ const IssueForm = React.createClass({
 		if (this._validate(issueData)) {
 			// do something
 		}
+		formEl.reset()
 
 		ACTIONS.addIssue(issueData)
 		
-		formEl.reset()
 	},
 
 	_validate: function(data) {

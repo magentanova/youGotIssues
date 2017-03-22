@@ -2,10 +2,12 @@ import React from 'react'
 
 import IssueForm from './issueForm.js'
 import STORE from '../store.js'
+import ACTIONS from '../actions.js'
 // es5 way of creating react components
 
 const IssuesPage = React.createClass({
 	componentWillMount: function() {
+		ACTIONS.fetchAllIssues()
 		STORE.on('dataUpdated', () => {
 			this.setState(STORE.data)
 		})
@@ -16,7 +18,7 @@ const IssuesPage = React.createClass({
 	},
 
 	 render: function() {
-	 	console.log('state on issuesPage', this.state)
+	 	
 	 	return (
 	 		<div className='issues-page' >
 	 			<h1>You Got Issues!</h1>
