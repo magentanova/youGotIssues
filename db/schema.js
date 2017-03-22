@@ -22,5 +22,6 @@ const issueSchema = new mongoose.Schema({
 })
 
 module.exports = {
-  User: mongoose.model('User', usersSchema)
+  User: mongoose.model('User', usersSchema),
+  Issue: mongoose.model('Issue', issueSchema)
 }
