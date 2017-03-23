@@ -26,11 +26,6 @@ const ACTIONS = {
 					console.log(err)
 				}
 			)
-
-
-		STORE.set({
-			issueCollection: issueColl
-		})
 	},
 
 	fetchAllIssues: function() {
