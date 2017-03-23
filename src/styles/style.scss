@@ -3,8 +3,8 @@ $nineties-purple: #AC69D3;
 $nineties-blue: #7BB4C5;
 $almost-black: #222;
 
-@mix-in drop-shadow($color) {
-	box-shadow: 5px 5px 0 $nineties-purple;
+@mixin drop-shadow($color,$width) {
+	box-shadow: $width $width 0 $color;
 } 
 
 * {
@@ -12,14 +12,34 @@ $almost-black: #222;
 	box-sizing: border-box;
 }
 
+html {
+	font-size: 16px;
+}
+
+h1 {
+	font-size: 3rem;
+}
+
+h2 {
+	font-size: 2rem;
+}
+
+h3 {
+	font-size: 1.5rem;
+}
+
+p,a,span,i,strong,b,h4,h5,h6,input,button {
+	font-size: 1rem;
+}
+
+body {
+	margin: 0;
+	background: $nineties-blue;
+}
 .container {
 	text-align: center;
-	background: $nineties-blue;
-	height: 100vh;
-
-	&:hover {
-		background: lighten($nineties-blue,5)
-	}
+	width: 75%;
+	margin: 0 auto;
 
 	h1 {
 		font-size: 72px;
@@ -29,7 +49,26 @@ $almost-black: #222;
 		display: inline-block;
 		padding: 10px 20px;
 		transform: skew(-1deg,-2deg);
-		@include drop-shadow($nineties-purple)
+		@include drop-shadow($nineties-purple,5px)
+	}
+	.issues-list {
+		margin-top: 30px;
+		font-size: 0;
+
+		.issue-container {
+			background: $nineties-purple;
+			border: 1px solid $almost-black;
+		    display: inline-block;
+		    margin: 1.5%;
+		    padding: 10px;
+		    width: 30%;
+		    @include drop-shadow($nineties-yellow,2px);
+
+		    h3 {
+		    	color: $nineties-yellow;
+		    	text-shadow: 2px 2px 0 $almost-black;
+		    }
+		}
 	}
 }
 

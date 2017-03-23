@@ -1,7 +1,12 @@
 import Backbone from 'backbone'
 
 export const IssueModel = Backbone.Model.extend({
-	url: '/api/issues',
+	// with a urlRoot property instead of just a url, 
+		// backbone will append the id to the end of the
+		// url for PUT or DELETE request
+	// note that with our models, this only works if we've
+	// specificed that _id is the id attribute. 
+	urlRoot: '/api/issues',
 	// backbone uses the model's id for a lot of crucial 
 	// functionality. it will look for a property called 
 	// id on your record. 

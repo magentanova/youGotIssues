@@ -3,6 +3,7 @@ import React from 'react'
 import IssueForm from './issueForm.js'
 import STORE from '../store.js'
 import ACTIONS from '../actions.js'
+import {getRandomTransforms} from '../utils.js'
 // es5 way of creating react components
 
 const IssuesPage = React.createClass({
@@ -44,18 +45,39 @@ const IssuesList = React.createClass({
 })
 
 const Issue = React.createClass({
+	_handleDelete: function() {
+		ACTIONS.deleteMod(this.props.issueModel)
+	},
+
+	_handleLike: function() {
+		ACTIONS.addLike(this.props.issueModel)
+	},
+
 	render: function() {
+		var styleObj = {transform: getRandomTransforms()}
 		return (
-			<div className="issue-container">
+			<div style={styleObj} className="issue-container">
 				<h3 className="issue-text">
 					{this.props.issueModel.get('relationshipIssue')}
 				</h3>
 				<p className="poster-name">
-					posted by {this.props.issueModel.get('userName')} 
-					<span>
-						&nbsp;who is {this.props.issueModel.get('relationshipStatus')}
-					</span>
+					posted by <b>{this.props.issueModel.get('userName')}</b> who is
+					<i>
+						&nbsp;{this.props.issueModel.get('relationshipStatus')}
+					</i>
 				</p>
+				<div className="buttons">
+					<button 
+						className="delete" 
+						onClick={this._handleDelete}>
+						X
+					</button>
+					<button 
+						className="like"
+						onClick={this._handleLike}>
+						{this.props.issueModel.get('likes')}&nbsp;LIKES
+					</button>
+				</div>
 			</div>
 			)
 	}

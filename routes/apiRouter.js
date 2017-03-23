@@ -92,6 +92,44 @@ const Issue = require('../db/schema.js').Issue
           response.json(record)
         })
       })
+      // DELETE is a request made for a single, pre-existing issue. 
+        // 
+      .delete('/issues/:issueId', function(request,response){
+        Issue.remove({_id: request.params.issueId}, function(error) {
+          if (error) {
+            return response.status(400).json(error)
+          }
+          response.json({
+            msg: `target with id ${request.params.issueId} has been eliminated.`,
+            id: request.params.issueId
+          })
+        })
+      })
+
+      .put('/issues/:issueId', function(request,response) {
+        // arguments, in order: the record id, the modified record, options obj, callback
+        // see mongoose docs to explore this and other methods on a model.
+        Issue.findByIdAndUpdate(request.params.issueId,request.body,{new: true}, function(error,record) {
+          if (error) {
+            console.log(response)
+            return response.status(400).json(error)
+          }
+          response.json(record)
+        })
+      })
+
+      // warmup exercise. non-working code.
+      // match a GET request to /api/products. if that matches, run 
+        // the callback that is the second argument.
+      // .get('/products', function(request, response) {
+      //   Product.find(request.query,function(error,records) {
+      //     if (error) {
+      //       response.status(500).json(error)
+      //       return 
+      //     }
+      //     response.json(records)
+      //   })
+      // })
 
 
 module.exports = apiRouter

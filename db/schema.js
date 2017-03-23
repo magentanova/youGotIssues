@@ -18,6 +18,7 @@ const issueSchema = new mongoose.Schema({
 	userName: { type: String, required: true },
 	relationshipStatus: {type: String, required: true},
 	relationshipIssue: {type: String, required: true},
+  likes: {type: Number, default: 0},
 	createdAt: { type: Date, default: Date.now }
 })
 

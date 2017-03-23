@@ -16,21 +16,45 @@ const ACTIONS = {
 				// .then can actually take two callbacks, one to 
 					// handle a good response, and one to handle
 					// an error.
-				function(response) {
-					console.log(response)
+				function(response) { // SUCCESS
 					alert('saved one for ya!')
 					ACTIONS.fetchAllIssues()
 				},
-				function(err) {
+				function(err) { // FAILURE
 					alert('problem saving your issue!')
 					console.log(err)
 				}
 			)
+	},
 
-
-		STORE.set({
-			issueCollection: issueColl
+	addLike: function(model) {
+		model.set({
+			likes: model.get('likes') + 1
 		})
+		model.save() // since the model is old, i.e. it already 
+		// has an id, backbone will send a PUT request here instead 
+		// of a POST request
+		// AND, since the model has a urlRoot and an idAttribute,
+		// backbone will anticipate our needs and stick the model's _id
+		// onto the end of the url. 
+			.done(function(resp) {
+				console.log(resp)
+				ACTIONS.fetchAllIssues()
+			})
+			.fail(function(err) {
+				alert('couldn\'t register your like')
+				console.log(err)
+			})
+	},
+
+	deleteMod: function(model) {
+		model.destroy()
+			.done(ACTIONS.fetchAllIssues)
+			.fail(
+				function(err) {
+					alert('problem deleting your model!')
+					console.log(err)
+				})
 	},
 
 	fetchAllIssues: function() {
