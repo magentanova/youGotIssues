@@ -7,8 +7,9 @@ const Banner = React.createClass({
 	 render: function() {
 	 	// if there's no current user, User.getCurrentUser() will return null, 
 	 		// which is falsy
-	 	console.log(User.getCurrentUser())
-	 	var welcomeText = User.getCurrentUser() ? `welcome ${User.getCurrentUser().get('name')}!` : ''
+
+	 	var welcomeText = User.getCurrentUser() ? `welcome ${User.getCurrentUser().get('name')}!` : '',
+	 		myIssuesLink = User.getCurrentUser() ? "#issues/user/" + User.getCurrentUser().get('_id') : ''
 	 	return (
 	 		<div className='banner' >
 	 			<h1>You Got Issues!</h1>
@@ -19,7 +20,7 @@ const Banner = React.createClass({
 	 					</a>
 	 				</li>
 	 				<li className="nav-item">
-	 					<a href="#issues/tbd" className="nav-link">
+	 					<a href={myIssuesLink} className="nav-link">
 	 						my issues
 	 					</a>
 	 				</li>

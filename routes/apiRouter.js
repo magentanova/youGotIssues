@@ -59,6 +59,12 @@ const Issue = require('../db/schema.js').Issue
         // filter our request. it will only be meaningful if the
         // front-end developer included a query string in their 
         // request.
+      // a url like /api/issues?userId=123&relationshipStatus=single
+        // will result in a request.query that looks like
+        // {
+        //   userId: 123,
+        //   relationshipStatus: single
+        // }
       Issue.find(request.query, function(error, records) {
         // this callback will handle the response from the database. 
           // if the query went well, error will be null and we'll 

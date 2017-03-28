@@ -12,7 +12,6 @@ const IssueForm = React.createClass({
 		// prevent the submit event from making its own request
 		var formEl = eventObj.target
 		var issueData = {
-			userName: formEl.theirName.value,
 			relationshipStatus: formEl.status.value,
 			relationshipIssue: formEl.issue.value
 		}
@@ -34,7 +33,6 @@ const IssueForm = React.createClass({
 	 render: function() {
 	 	return (
 	 		<form onSubmit={this._handleSubmit} className='issue-form' >
-	 			<input name="theirName" type="text" placeholder="your name" />
 	 			<select name="status" >
 	 				<option disabled>what's your status?</option>
 	 				<option value="single">single</option>

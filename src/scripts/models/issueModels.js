@@ -13,6 +13,13 @@ export const IssueModel = Backbone.Model.extend({
 	idAttribute: '_id'
 })
 
+// model.save()
+// //for a PUT
+// '/api/issues/abd98r31jof89'
+// // model.destroy()
+// // for a DELETE
+// '/api/issues/abd98r31jof89'
+
 export const IssueCollection = Backbone.Collection.extend({
 	comparator: function(mod) {
 		// this tells backbone to sort the collection using 

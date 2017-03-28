@@ -59,6 +59,7 @@ const RegisterForm = React.createClass({
 
 const LoginForm = React.createClass({
 	_handleSubmit: function(evtObj) {
+		evtObj.preventDefault()
 		ACTIONS.logUserIn(evtObj.target.email.value, evtObj.target.password.value)
 	},
 

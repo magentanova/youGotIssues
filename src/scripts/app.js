@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom'
 import Backbone from 'backbone'
 import init from './init'
 
-import IssuesPage from './views/issuesPage.js'
+import AllIssuesPage from './views/allIssuesPage.js'
+import UserIssuesPage from './views/userIssuesPage.js'
 import LoginPage from './views/loginPage.js'
 
 const app = function() {
 	const IssueRouter = Backbone.Router.extend({
 		routes: {
 			'issues/all': 'showAllIssues',
+			'issues/user/:id': 'showIssuesByUser',
 			'login': 'showLoginPage',
 			'*default': 'redirect'
 		},
@@ -19,8 +21,13 @@ const app = function() {
 			// otherwise redirect to login
 		},
 		showAllIssues: function() {
-			ReactDOM.render(<IssuesPage />, document.querySelector('.container'))
+			ReactDOM.render(<AllIssuesPage />, document.querySelector('.container'))
 		},
+
+		showIssuesByUser: function(id) {
+			ReactDOM.render(<UserIssuesPage userId={id} />, document.querySelector('.container'))
+		},
+
 		showLoginPage: function() {
 			ReactDOM.render(<LoginPage />, document.querySelector('.container'))
 		}

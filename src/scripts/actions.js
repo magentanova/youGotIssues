@@ -4,7 +4,8 @@ import User from './models/userModel.js'
 
 const ACTIONS = {
 	addIssue: function(issueData) {
-
+		issueData.userName = User.getCurrentUser().get('name')
+		issueData.userId = User.getCurrentUser().get('_id')
 		var newIssue = new IssueModel(issueData) // creates a 
 			// new instance of IssueModel, setting the issueData
 			// from the form as its .attributes. this data (username, 
@@ -19,7 +20,7 @@ const ACTIONS = {
 					// an error.
 				function(response) { // SUCCESS
 					alert('saved one for ya!')
-					ACTIONS.fetchAllIssues()
+					ACTIONS.fetchIssues()
 				},
 				function(err) { // FAILURE
 					alert('problem saving your issue!')
@@ -40,7 +41,7 @@ const ACTIONS = {
 		// onto the end of the url. 
 			.done(function(resp) {
 				console.log(resp)
-				ACTIONS.fetchAllIssues()
+				ACTIONS.fetchIssues()
 			})
 			.fail(function(err) {
 				alert('couldn\'t register your like')
@@ -50,7 +51,7 @@ const ACTIONS = {
 
 	deleteMod: function(model) {
 		model.destroy()
-			.done(ACTIONS.fetchAllIssues)
+			.done(ACTIONS.fetchIssues)
 			.fail(
 				function(err) {
 					alert('problem deleting your model!')
@@ -58,12 +59,38 @@ const ACTIONS = {
 				})
 	},
 
-	fetchAllIssues: function() {
+	fetchIssues: function() {
+		// we allow this function to be used with or without 
+			// a query object that will filter our fetch. 
+			// if no queryObject is passed in, it will be undefined,
+			// and we'll set it to be empty object.
+
 		var issueColl = STORE.get('issueCollection')
 		// backbone && jquery, on our behalf, will add a "GET" 
 		// verb to the header of our request when we use 
 		// .fetch()
 		issueColl.fetch()
+			.then(function() {
+				STORE.set({
+					issueCollection: issueColl
+				})
+			})
+	},
+
+	fetchIssuesByUser: function(inputId) {
+		var issueColl = STORE.get('issueCollection')
+		// backbone && jquery, on our behalf, will add a "GET" 
+		// verb to the header of our request when we use 
+		// .fetch()
+
+		// with a data object set for fetch's input options object, we can
+			// add key-value pairs to the query string
+		// e.g. /api/issues?userId=132lk5lhjlk4
+		issueColl.fetch({
+			data: {
+				userId: inputId
+				} 
+		})
 			.then(function() {
 				STORE.set({
 					issueCollection: issueColl
