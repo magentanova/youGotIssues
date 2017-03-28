@@ -1,6 +1,8 @@
 import React from 'react'
 
 import IssueForm from './issueForm.js'
+import Banner from './banner.js'
+
 import STORE from '../store.js'
 import ACTIONS from '../actions.js'
 import {getRandomTransforms} from '../utils.js'
@@ -22,7 +24,7 @@ const IssuesPage = React.createClass({
 	 	
 	 	return (
 	 		<div className='issues-page' >
-	 			<h1>You Got Issues!</h1>
+	 			<Banner />
 	 			<IssueForm />
 	 			<IssuesList issueCollection={this.state.issueCollection} />
 	 		</div>

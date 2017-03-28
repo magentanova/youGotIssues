@@ -1,3 +1,5 @@
+@import '../../node_modules/bootstrap/dist/css/bootstrap.min.scss';
+
 $nineties-yellow: #FEFF00; 
 $nineties-purple: #AC69D3;
 $nineties-blue: #7BB4C5;
@@ -41,6 +43,17 @@ body {
 	width: 75%;
 	margin: 0 auto;
 
+	.banner {
+		li {
+			display: inline-block;
+
+			a {
+				display: inline-block;
+				cursor: pointer;
+			}
+		}
+	}
+
 	h1 {
 		font-size: 72px;
 		text-align: center;
@@ -51,6 +64,15 @@ body {
 		transform: skew(-1deg,-2deg);
 		@include drop-shadow($nineties-purple,5px)
 	}
+	.login-page {
+		form {
+			input {
+				display: block;
+				margin: 15px auto;
+			}
+		}
+	}
+
 	.issues-list {
 		margin-top: 30px;
 		font-size: 0;
